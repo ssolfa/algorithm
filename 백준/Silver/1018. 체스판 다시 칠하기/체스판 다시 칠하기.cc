@@ -27,7 +27,7 @@ string BW[8] =
 
 int main()
 {
-    int N, M;
+    int N, M, result = 64;
     cin >> N >> M;
     char str[N][M];
 
@@ -38,8 +38,6 @@ int main()
             cin >> str[i][j];
         }
     }
-
-    int result = 64;
 
     for (int i = 0; i <= N - 8; i++)
     {
