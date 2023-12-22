@@ -1,36 +1,33 @@
 #include <iostream>
 #include <algorithm>
-#include <string>
+using namespace std;
 
-bool is_lucky(const std::string& s) {
-    for (int i = 0; i < s.length() - 1; ++i) {
-        if (s[i] == s[i + 1]) {
+bool check(string &s){
+    for (int i = 0; i < s.length() - 1; i++){
+        if (s[i] == s[i + 1]){
             return false;
         }
     }
     return true;
 }
 
-int count_lucky_strings(const std::string& s) {
-    std::string temp = s;
-    std::sort(temp.begin(), temp.end()); 
+int find(string& s){
+    string temp = s;
+    sort(temp.begin(), temp.end());
 
     int count = 0;
-    do {
-        if (is_lucky(temp)) {
-            ++count;
-        }
-    } while (std::next_permutation(temp.begin(), temp.end()));
 
+    do{
+        if (check(temp)){
+            count++;
+        }
+    } while (next_permutation(temp.begin(), temp.end()));
     return count;
 }
 
-int main() {
-    std::string input_str;
-    std::cin >> input_str;
-
-    int result = count_lucky_strings(input_str);
-    std::cout << result << std::endl;
-
-    return 0;
+int main(){
+    string s;
+    cin >> s;
+    int result = find(s);
+    cout << result;
 }
