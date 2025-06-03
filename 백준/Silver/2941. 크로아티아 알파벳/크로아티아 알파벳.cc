@@ -2,30 +2,21 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
+    string croatian[8] = { "dz=", "c=", "c-", "d-", "lj", "nj", "s=", "z="};
     string str;
     cin >> str;
-
-    string croatian[8] = { "dz=", "c=", "c-", "d-", "lj", "nj", "s=", "z=" };
-
-    int count = 0;
-    for (int i = 0; i < str.length(); ) {
-        bool matched = false;
-        for (int j = 0; j < 8; j++) {
-            int len = croatian[j].length();
-            if (str.substr(i, len) == croatian[j]) {
-                i += len;
-                count++;
-                matched = true;
-                break;
+    
+    for(int i=0 ; i<8; i++){
+        while(str.find(croatian[i]) != string::npos) {
+            if(croatian[i] == "dz=") {
+                str.replace(str.find(croatian[i]), 3, "#");
+            } else {
+                str.replace(str.find(croatian[i]), 2, "#");
             }
         }
-        if (!matched) {
-            i++;
-            count++;
-        }
     }
-
-    cout << count;
-    return 0;
+    
+    cout << str.length();
 }
