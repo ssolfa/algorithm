@@ -1,30 +1,37 @@
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
-int N, M;
-int arr[9];
-bool visited[9];
+int n, m;
+vector<int> result;
+vector<bool> used;
 
-void dfs(int k){
-    if (k == M){
-        for (int i = 0; i < M; i++){
-            cout << arr[i]<< ' ';
+void solve(int depth){
+    if(depth == m){
+        for(int i=0 ; i<m ; i++){
+            cout << result[i] << " ";
         }
-        cout << '\n';
+        cout << "\n";
+        return;
     }
-    else{
-        for (int i = 1; i <= N; i++){
-            if (!visited[i]){
-                visited[i] = true;
-                arr[k] = i;
-                dfs(k + 1);
-                visited[i] = false;
-            }
+    
+    for(int i=1 ; i<=n ; i++){
+        if(!used[i]){
+            used[i] = true;
+            result.push_back(i);
+            
+            solve(depth + 1);
+            
+            result.pop_back();
+            used[i] = false;
         }
     }
 }
 
-int main(){
-    cin >> N >> M;
-    dfs(0);
+int main()
+{
+    cin >> n >> m;
+    used.resize(n + 1, false);
+    solve(0);
 }
